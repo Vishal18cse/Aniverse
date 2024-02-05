@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in</title>
+
+  <link rel="icon" type="image/x-icon" href="/static/assets/favico.ico" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+  <link href="/static/css/main.css" rel="stylesheet" />
+
+</head>
+
+<body style="background-image: url('/static/assets/img/anime.png')">
+
+  <div class="container p-5">
+    <div class="row justify-content-left">
+      <div class="col-md-6 py-5 px-5 bg-dark opacity-75 rounded-5" style="color: white;">
+        <h1 class="text-center mb-5 h1" style="color: white;">Log in</h1>
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="form-group mb-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-person " style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;
+              <input type="text" class="form-control my-custom-height" id="name" name="name" placeholder="Username"
+                required>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-file-lock" style="font-size: 30px;"></i>&nbsp;&nbsp;&nbsp;
+              <input type="password" class="form-control my-custom-height" id="password" name="password"
+                placeholder="Password" required>
+            </div>
+            <br>
+            <div class="col-12 d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow ">
+                &nbsp;Log in &nbsp;<i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+
+        </form>
+        <p class="text-center mt-4 text-white h5">Does not have an account? <a class="text-primary" href="/signup">Sign
+            up</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const passwordToggleEls = document.querySelectorAll('.password-toggle');
+    passwordToggleEls.forEach(el => el.addEventListener('click', function () {
+      const passwordInput = this.previousElementSibling;
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        this.classList.add('bi-eye');
+      } else {
+        passwordInput.type = 'password';
+        this.classList.remove('bi-eye');
+      }
+    }));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourite</title>
+
+    <link rel="icon" type="image/x-icon" href="/static/assets/favico.ico" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link href="/static/css/main.css" rel="stylesheet" />
+</head>
+
+<body id="page-top" style="background-color: rgb(16, 16, 16);">
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-6">
+            <a class="navbar-brand" href="/">
+                <h1 style="color: white;">Aniverse</h1>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <form action="" method="get" class="search-form">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-search"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <input type="text" id="search-input" name="search_anime" class="form-control"
+                                        placeholder="Search anime..." aria-label="Search anime" required>
+                                    <!-- <button type="submit" class="btn btn-primary">Filter</button> -->
+                                </div>
+                            </form>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/">
+                        <h5 id="hover">Home</h5>
+                        </a></li>
+                    {% if login %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <h5 id="hover">Anime Hub</h5>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 20px;">
+                            <li><a class="dropdown-item" href="/anime">All Anime</a></li>
+                            <li><a class="dropdown-item" href="/favourite">Favourites</a></li>
+                            <li><a class="dropdown-item" href="/watchlist">Watchlist</a></li>
+                            <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+                        </ul>
+                    </li>
+                    <li class=""><a class="nav-link" href="/logout">
+                            <h5 id="hover">Log Out</h5>
+                        </a></li>
+                    {% else %}
+                    <li class=""><a class="nav-link" href="/login">
+                            <h5 id="hover">Log in</h5>
+                        </a></li>
+                    <li class=""><a class="nav-link" href="/signup">
+                            <h5 id="hover">Sign up</h5>
+                        </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="padding-left:24px; padding-right: 10px;">
+        <div>
+            <h1 class="animeplex-title"
+                style="color: rgb(233, 233, 157); padding-left: 10px; padding-top: 5px; padding-bottom: 10px;">
+                Your Favourites</h1>
+        </div>
+        <div class="row">
+            {% for i in favorites %}
+            <div class="col-xl-2 col-md-6 align-items-stretch">
+                <a href="/{{i.slug}}" style="text-decoration: none;">
+                    <div class="card" style="color: #fff; position: relative;">
+                        <button type="button" class="removeFromFavoritesBtn" data-product-id="{{ i.id }}"
+                            style="position: absolute; top: 5px; right: 5px;">&times;</button>
+                        <img src="/media/{{i.img}}" class="card-img-top img-fluid">
+                        <br>
+                        <h5 class="text-center text-nowrap ">{{i.name}}</h5>
+                        <p class="text-center text-nowrap" style="color: rgb(206, 206, 72);">{{i.dis}}</p>
+                    </div>
+                </a>
+            </div>
+            {% empty %}
+            <h3>Your Favorites is empty</h3>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var removeButtons = document.querySelectorAll('.removeFromFavoritesBtn');
+
+            removeButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var productId = button.getAttribute('data-product-id');
+                    var card = button.closest('.col-xl-2');
+                    card.remove();
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Get the CSRF token from the cookie
+            var csrftoken = Cookies.get('csrftoken');
+
+            $('.removeFromFavoritesBtn').click(function () {
+                event.preventDefault();
+                var button = $(this);
+                var productId = button.data('product-id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/delete-from-favourite/' + productId + '/',  // Update with your actual URL
+                    data: {},
+                    beforeSend: function (xhr) {
+                        // Include the CSRF token in the request headers
+                        xhr.setRequestHeader('X-CSRFToken', csrftoken);
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            // Display a success message
+                            alert('Removed from Favorites');
+
+                            // Remove the corresponding favorites item
+                            var favoritesItem = button.closest('.favorites-item');
+                            favoritesItem.remove();
+                        } else {
+                            // Display an error message
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function (error) {
+                        // Handle any AJAX errors here
+                        console.error('AJAX request failed:', error);
+                        alert('Error: Failed to remove from Favorites');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

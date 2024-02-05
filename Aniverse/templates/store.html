@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load humanize %}
+{% load extra %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if a_slug %}{{ a_slug.name }}{% else %}Not Found{% endif %}</title>
+
+    <link rel="icon" type="image/x-icon" href="/static/assets/favico.ico" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link href="/static/css/main.css" rel="stylesheet" />
+
+    <style>
+        .bi-person-circle-1 {
+            /* Add any additional styling for the icon if needed */
+            margin-left: 20px;
+            /* Adjust the margin as needed */
+        }
+
+        .no-underline {
+            text-decoration: none !important;
+            /* Use !important to override default styles */
+        }
+
+
+        .username {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 5px;
+            /* Add some space between username and time */
+        }
+
+        .comment-time {
+            font-style: italic;
+            font-size: 0.8em;
+        }
+
+        .username-reply {
+            font-weight: bold;
+            font-size: 1.0em;
+            margin-right: 5px;
+            /* Add some space between username and time */
+        }
+
+        .comment-time-reply {
+            font-style: italic;
+            font-size: 0.6em;
+        }
+    </style>
+
+</head>
+
+<body id="page-top" style="background-color: rgb(16, 16, 16);">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-6">
+            <a class="navbar-brand" href="/">
+                <h1 style="color: white;">Aniverse</h1>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <form action="" method="get" class="search-form">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-search"
+                                                aria-hidden="true"></i></span>
+                                    </div>
+                                    <input type="text" id="search-input" name="search_anime" class="form-control"
+                                        placeholder="Search anime..." aria-label="Search anime" required>
+                                    <!-- <button type="submit" class="btn btn-primary">Filter</button> -->
+                                </div>
+                            </form>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/">
+                            <h5 id="hover">Home</h5>
+                        </a></li>
+                    {% if login %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <h5 id="hover">Anime Hub</h5>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 20px;">
+                            <li><a class="dropdown-item" href="/anime">All Anime</a></li>
+                            <li><a class="dropdown-item" href="/favourite">Favourites</a></li>
+                            <li><a class="dropdown-item" href="/watchlist">Watchlist</a></li>
+                            <li><a class="dropdown-item" href="/contact">Contact Us</a></li>
+                        </ul>
+                    </li>
+                    <li class=""><a class="nav-link" href="/logout">
+                            <h5 id="hover">Log Out</h5>
+                        </a></li>
+                    {% else %}
+                    <li class=""><a class="nav-link" href="/login">
+                            <h5 id="hover">Log in</h5>
+                        </a></li>
+                    <li class=""><a class="nav-link" href="/signup">
+                            <h5 id="hover">Sign up</h5>
+                        </a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main">
+        <h1>{% if a_slug %}{{ a_slug.name }}{% else %}Not Found{% endif %}</h1>
+        <img class='i' src="/media/{{a_slug.i_img}}" alt="Anime Poster">
+
+        <div>
+            {% if a_slug.dis %}
+            <h2>Genre</h2>
+            <p>{{ a_slug.dis}}</p>
+            {% else %}
+            No description available.
+            {% endif %}
+        </div>
+
+        <div>
+            <h2>Storyline</h2>
+            <p>{{a_slug.story}}</p>
+        </div>
+
+        <!--images-->
+        <div class="Images">
+            <h2>Images</h2>
+            <div class="image-gallery">
+                <a data-fancybox="gallery" href="/media/{{a_slug.i1}}" data-caption="Image 1">
+                    <img src="/media/{{a_slug.i1}}" alt="Image 1">
+                </a>
+                <a data-fancybox="gallery" href="/media/{{a_slug.i2}}" data-caption="Image 2">
+                    <img src="/media/{{a_slug.i2}}" alt="Image 2">
+                </a>
+                <a data-fancybox="gallery" href="/media/{{a_slug.i3}}" data-caption="Image 3">
+                    <img src="/media/{{a_slug.i3}}" alt="Image 3">
+                </a>
+                <a data-fancybox="gallery" href="/media/{{a_slug.i4}}" data-caption="Image 4">
+                    <img src="/media/{{a_slug.i4}}" alt="Image 4">
+                </a>
+            </div>
+        </div>
+        <br>
+        <!--buttons-->
+        <div>
+            {% if login %}
+            <form class="wishlistForm" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="productId" value="{{ a_slug.id }}">
+                <button type="submit" class="addToWishlistBtn" name="action_type" value="wishlist">Add to
+                    Wishlist</button>
+            </form>
+            <div id="wishlistMessage" style="display: none;"></div>
+
+            <form class="favoriteForm" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="productId" value="{{ a_slug.id }}">
+                <button type="submit" class="addToFavoritesBtn" name="action_type" value="favorites">Add to
+                    Favorites</button>
+            </form>
+            <div id="favoriteMessage" style="display: none;"></div>
+        </div>
+        {% endif %}
+
+        {% if login %}
+        <div class=" my-3">
+            <h2>Comments({{comments.count}})</h2>
+            <form action="{% url 'comment' %}" method="post" class="mt-4 align-middle-form">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="message" class="col-md-2 col-form-label">
+                        <h5>Comment :</h5>
+                    </label>
+                    <div class="col-md-8 d-flex flex-column">
+                        <textarea class="form-control mb-2" name="message" id="message" rows="3" required></textarea>
+                        <input type="hidden" name="anime_id" value="{{ a_slug.id }}">
+                        <input type="hidden" name="reply_id" value="">
+                    </div>
+                    <div class="col-md-2 d-flex align-items-center">
+                        <button type="submit" class="btn btn-primary" name="action_type" value="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+
+
+            {% for comment in comments %}
+            <div class="row my-3 border-bottom">
+                <div class="col-md-1">
+                    <!-- Add an image or avatar for the user here -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
+
+                </div>
+                <div class="col-md-11">
+                    <h6>
+                        <span class="username">{{ comment.user.username }}</span>
+                        <span class="comment-time">{{ comment.created_at | naturaltime }}</span>
+                    </h6>
+                    <p>{{ comment.message }}</p>
+                    <div class="reply mx-0"></div>
+                    <p class="d-inline-flex gap-2">
+                        <a class="btn-sm btn-primary no-underline" data-bs-toggle="collapse" href="#reply{{comment.id}}"
+                            role="button" aria-expanded="false" aria-controls="reply{{comment.id}}">
+                            Reply
+                        </a>
+                    </p>
+                    <div class="collapse" id="reply{{comment.id}}">
+                        <div class=" my-2">
+                            <form action="{% url 'comment' %}" method="post" class="mt-4">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <label for="message" class="col-md-2 col-form-label" style="width: 13.666667%;">
+                                        <h6>Your Reply :</h6>
+                                    </label>
+                                    <div class="col-md-8">
+                                        <textarea type="text" class="form-control" name="message" id="message"
+                                            required></textarea>
+                                        <input type="hidden" name="anime_id" value="{{a_slug.id}}">
+                                        <input type="hidden" name="reply_id" value="{{comment.id}}">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary" name="action_type"
+                                            value="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="reply  my-2">
+                        {% for reply in dic|get_val:comment.id %}
+                        <div class="row"> <!-- Added a row class to properly structure the content -->
+                            <div class="col-md-1 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                                    class="bi bi-person-circle-1" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                    <path fill-rule="evenodd"
+                                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                                </svg>
+
+                            </div>
+                            <div class="col-md-11">
+                                <h6>
+                                    <span class="username-reply">{{ reply.user.username }}</span>
+                                    <span class="comment-time-reply">{{ reply.created_at | naturaltime }}</span>
+                                </h6>
+                                <p>{{ reply.message }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        {% endif %}
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Add your JavaScript scripts here -->
+    <script>
+        // Initialize Fancybox
+        $('[data-fancybox="gallery"]').fancybox();
+
+        // JavaScript to handle navigation
+        var currentIndex = 0;
+
+        $('#prevBtn').on('click', function () {
+            if (currentIndex > 0) {
+                currentIndex--;
+                showImages();
+            }
+        });
+
+        $('#nextBtn').on('click', function () {
+            // Add logic to check if there are more images
+            currentIndex++;
+            showImages();
+        });
+
+        function showImages() {
+            var images = $('.image-gallery a');
+            images.hide();
+            for (var i = currentIndex; i < currentIndex + 4 && i < images.length; i++) {
+                images.eq(i).show();
+            }
+        }
+
+        // Show the first 4 images initially
+        showImages();
+    </script>
+    <!--btn js-->
+    <script>
+        $(document).ready(function () {
+            $('.wishlistForm').submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                var btn = form.find('.addToWishlistBtn');
+
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize() + '&action_type=wishlist',
+                    headers: { 'X-CSRFToken': form.find('input[name="csrfmiddlewaretoken"]').val() },
+                    beforeSend: function () {
+                        btn.prop('disabled', true);
+                    },
+                    success: function (response) {
+                        console.log(response);
+
+                        if (response.success) {
+                            // Show the success message as an alert
+                            alert(response.message);
+                        } else {
+                            // Show the error message as an alert
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.error('AJAX request failed:', error);
+                        alert('Error: Failed to add to Watchlist');
+                    },
+                    complete: function () {
+                        btn.prop('disabled', false);
+                    }
+                });
+            });
+
+
+        });
+
+
+        $(document).ready(function () {
+            $('.favoriteForm').submit(function (event) {
+                event.preventDefault();
+                var form = $(this);
+                var btn = form.find('.addToFavoritesBtn');
+
+                $.ajax({
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize() + '&action_type=favorites',
+                    headers: { 'X-CSRFToken': form.find('input[name="csrfmiddlewaretoken"]').val() },
+                    beforeSend: function () {
+                        btn.prop('disabled', true);
+                    },
+                    success: function (response) {
+                        console.log(response);
+
+                        if (response.success) {
+
+                            alert('Added to Favourites');
+                        } else {
+
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.error('AJAX request failed:', error);
+                        alert('Error: Failed to add to Favourites');
+                    },
+                    complete: function () {
+                        btn.prop('disabled', false);
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+
+
+</body>
+
+
+
+
+</html>

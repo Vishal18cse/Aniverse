@@ -1,0 +1,302 @@
+.text-nowrap {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .card:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  .nav-link.dropdown-toggle:after {
+    content: none;
+  }
+  #hover:hover {
+    color: rgb(224, 221, 46);
+    transform: scale(1.05);
+  }
+  .carousel-item .carousel-inner {
+    aspect-ratio: 16/9;
+  }
+  .card-img-top {
+    aspect-ratio: 3/4;
+    width: 100%;
+  }
+  .nav-item input[type="text"] {
+    width: 400px;  
+    font-size: 20px;
+    border-radius: 10px;
+  }
+
+  /* font css */
+  @font-face {
+    font-family: myFirstFont;
+    src: url(/static/assets/OnePiece-zAqL.ttf);
+  }
+  h1 {
+    font-family: myFirstFont;
+    font-size: 50px;
+  }
+  h2 {
+    font-family: myFirstFont;
+    font-size: 40px;
+  }
+
+
+/* Pagination */
+
+.pagination-container {
+    margin: 100px auto;
+    text-align: center;
+}
+
+.pagination {
+    position: relative;
+    justify-content: center;
+}
+
+.pagination a {
+    position: relative;
+    display: inline-block;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 8px 16px 10px;
+}
+
+.pagination a:before {
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: "";
+    top: 0;
+    left: 0;
+    background-color: #2c3e50;
+    border-radius: 24px;
+    transform: scale(0);
+    transition: all 0.2s;
+}
+
+.pagination a:hover,
+.pagination a .pagination-active {
+    color: #fff;
+}
+
+.pagination a:hover:before,
+.pagination a .pagination-active:before {
+    transform: scale(1);
+}
+
+.pagination .pagination-active {
+    color: #fff;
+}
+
+.pagination .pagination-active:before {
+    transform: scale(1);
+}
+
+.pagination-newer {
+    margin-right: 50px;
+}
+
+.pagination-older {
+    margin-left: 50px;
+}
+
+/* login and Signup CSS */
+
+.my-custom-height {
+    height: 60px;
+}
+
+
+/* Store CSS */
+
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.image-gallery a {
+    flex: 1 0 200px;
+}
+.image-gallery img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+}
+/* Fancybox style adjustments */
+.fancybox-slide {
+    background-color: #101010 !important;
+}
+
+.fancybox-caption {
+    color: #fff !important;
+}
+
+
+.main {
+  border-radius: 10px;
+  max-width: 1120px;
+  margin: 0px auto;
+  padding: 40px;
+  background-color: rgb(30, 37, 37);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.main h1 {
+  font-family: 'myFirstFont';
+  font-size: 50px;
+}
+
+.i {
+  border-radius: 15px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.main h2 {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid rgb(206, 206, 72);
+  font-family: 'myFirstFont';
+  font-size: 40px;
+}
+
+.main p {
+  color: #ccc;
+}
+
+.addToFavoritesBtn {
+  background-color: transparent;
+  color: #fff;
+  padding: 12px 20px;
+  border: 2px solid rgba(214, 42, 42, 0.837);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.addToFavoritesBtn:hover {
+  filter: brightness(90%);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background-color: #ed0f0fb7;
+  color: #fff;
+}
+
+
+.wishlistForm,
+.favoriteForm {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.addToWishlistBtn {
+  background-color: transparent;
+  color: #fff;
+  padding: 12px 20px;
+  border: 2px solid rgba(211, 214, 42, 0.837);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.addToWishlistBtn:hover {
+  color: #fff;
+  filter: brightness(90%);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background-color: rgba(211, 214, 42, 0.837);
+}
+
+
+/* Watchlist */
+.removeFromWishlistBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.removeFromWishlistBtn:hover {
+  background-color: #c24343;
+}
+
+
+/* favourite */
+
+.removeFromFavoritesBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.removeFromFavoritesBtn:hover {
+  background-color: #c24343;
+}
+
+
+/* store add on for comments */
+
+.username {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-right: 5px;
+  /* Add some space between username and time */
+}
+
+.comment-time {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+/* contact.html */
+.custom-container {
+  max-width: 600px;
+}
+
+.custom-form {
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  border-radius: 15px;
+  color: white;
+}
+
+.custom-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.custom-icon {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.custom-btn {
+  margin-top: 1rem;
+}
+
+.anime-quote {
+  text-align: center;
+  font-style: italic;
+  margin-top: 20px;
+  color: #ddd;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <link rel="icon" type="image/x-icon" href="/static/assets/favico.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <link href="/static/css/main.css" rel="stylesheet" />
+    <style>
+        body {
+  background-image: url('/static/assets/img/contact.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
+}
+        .h1{
+            font-size: 3.5rem;
+        }
+        .text-center mb-5 h1{
+            font-size: 30em;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="container custom-container">
+        <div class="row justify-content-centre">
+            <div class="col-md-12 py-4 px-5 custom-form">
+                <h1 class="text-center mb-5 h1">Contact Us</h1>
+                <form action="{% url 'index' %}" method="post" onsubmit="showAlert()">
+                    {% csrf_token %}
+                    <div class="form-group mb-4">
+                        <label for="name" class="custom-label">
+                            <i class="bi bi-person custom-icon"></i>
+                            <input type="text" class="form-control my-custom-height" id="name" name="name"
+                                placeholder="Your Name" required>
+                        </label>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="email" class="custom-label">
+                            <i class="bi bi-envelope custom-icon"></i>
+                            <input type="email" class="form-control my-custom-height" id="email" name="email"
+                                placeholder="Your Email" required>
+                        </label>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="message" class="custom-label">
+                            <i class="bi bi-chat-dots custom-icon"></i>
+                            <textarea id="message" name="message" class="form-control " rows="4"
+                                placeholder="Your Message" required></textarea>
+                        </label>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill shadow custom-btn">
+                            &nbsp;Send Message &nbsp;<i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <p class="anime-quote">"In every frame of anime, there's a story waiting to be told."</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+         function showAlert() {
+      alert("Message submitted successfully!");
+    }
+    </script>
+</body>
+
+</html>
