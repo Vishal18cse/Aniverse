@@ -1,1 +1,0 @@
-web : gunicorn Aniverse.wsgi --log-file--
