@@ -35,6 +35,7 @@ Aniverse is the ultimate anime discovery and tracking platform, designed for ent
     ```bash
     python manage.py runserver
 
+---
 ## Technology Used
 
 - **Backend:** Python(Django)
