@@ -16,10 +16,10 @@ Aniverse is the ultimate anime discovery and tracking platform, designed for ent
 ## Demo
 - **Screenshots/GIFs:**  
 
-  ![Homepage](Aniverse/Aniverse/static/assets/ScreenShot/screen1.png)
-  ![Homepage](Aniverse/Aniverse/static/assets/ScreenShot/screen2.png)
+  ![Homepage](Aniverse/static/assets/ScreenShot/screen1.png)
+  ![Homepage](Aniverse/static/assets/ScreenShot/screen2.png)
 
-  ![Homepage](Aniverse/Aniverse/static/assets/ScreenShot/screen3.png)
+  ![Homepage](Aniverse/static/assets/ScreenShot/screen3.png)
 
 ---
 
